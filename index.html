@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Mejía | Portafolio de Programación</title>
+    
+    <!-- FAVICON - Icono que aparece en la pestaña del navegador -->
+    <!-- Icono de código personalizado en SVG -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1005/1005141.png">
+    
+    <style>
+        /* ============================================
+           VARIABLES GLOBALES - COLORES Y FUENTES
+           ============================================ */
+        :root {
+            --primary-color: #0a192f;      /* Color de fondo principal (azul oscuro) */
+            --secondary-color: #64ffda;    /* Color de acento (cian/turquesa) */
+            --text-color: #ccd6f6;         /* Color del texto principal (gris azulado claro) */
+            --text-secondary: #8892b0;     /* Color del texto secundario (gris azulado) */
+            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, sans-serif;
+            /* Define la fuente principal con alternativas */
+        }
+
+        /* ============================================
+           ESTILOS GENERALES
+           ============================================ */
+        * {
+            margin: 0;        /* Elimina margen por defecto en todos los elementos */
+            padding: 0;       /* Elimina relleno por defecto en todos los elementos */
+            box-sizing: border-box; /* El ancho y alto incluyen el border y padding */
+        }
+
+        html {
+            scroll-behavior: smooth; /* Hace que los scrolls sean suaves */
+        }
+
+        body {
+            font-family: var(--font-main);      /* Aplica la fuente principal */
+            background-color: var(--primary-color); /* Fondo azul oscuro */
+            color: var(--text-color);           /* Texto gris azulado claro */
+            overflow-x: hidden;                 /* Oculta scrollbar horizontal */
+            line-height: 1.6;                   /* Espacio entre líneas */
+        }
+
+        /* ============================================
+           NAVEGACIÓN FIJA
+           ============================================ */
+        nav {
+            position: fixed;            /* Mantiene la nav fija al hacer scroll */
+            top: 0;                     /* Posicionada en la parte superior */
+            left: 0;                    /* Alineada a la izquierda */
+            width: 100%;                /* Ancho completo */
+            padding: 2rem 5%;           /* Espaciado interno */
+            display: flex;              /* Usa flexbox para alinear elementos */
+            justify-content: space-between; /* Separa logo y enlaces */
+            align-items: center;        /* Centra verticalmente */
+            z-index: 100;               /* Se mantiene por encima de otros elementos */
+            background-color: rgba(10, 25, 47, 0.9); /* Fondo semi-transparente */
+            backdrop-filter: blur(5px); /* Efecto de desenfoque de fondo (glassmorphism) */
+        }
+
+        .logo {
+            font-size: 1.5rem;          /* Tamaño del logo */
+            font-weight: 700;           /* Texto en negrita */
+            color: var(--secondary-color); /* Color cian */
+            text-decoration: none;      /* Sin subrayado */
+        }
+
+        .nav-links {
+            display: flex;              /* Alinea los enlaces horizontalmente */
+            gap: 2rem;                  /* Espacio entre enlaces */
+        }
+
+        .nav-links a {
+            color: var(--text-color);   /* Texto gris azulado */
+            text-decoration: none;      /* Sin subrayado */
+            font-size: 1rem;            /* Tamaño del texto */
+            transition: color 0.3s ease; /* Transición suave al cambiar color */
+            position: relative;         /* Para posicionar el pseudo-elemento ::after */
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color); /* Cambia a cian al pasar el ratón */
+        }
+
+        /* Línea subrayada animada que aparece al hacer hover */
+        .nav-links a::after {
+            content: '';                /* Crea un pseudo-elemento vacío */
+            position: absolute;         /* Lo posiciona de forma absoluta */
+            width: 0;                   /* Ancho inicial de 0 */
+            height: 2px;                /* Altura de la línea */
+            bottom: -5px;               /* Posición debajo del texto */
+            left: 0;                    /* Comienza desde la izquierda */
+            background-color: var(--secondary-color); /* Color cian */
+            transition: width 0.3s ease; /* Transición suave del ancho */
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;                /* Expande la línea al hacer hover */
+        }
+
+        /* ============================================
+           HEADER / SECCIÓN PRINCIPAL
+           ============================================ */
+        .homepage-header {
+            height: 100vh;              /* Altura igual al viewport */
+            display: flex;              /* Usa flexbox */
+            align-items: center;        /* Centra verticalmente */
+            justify-content: center;    /* Centra horizontalmente */
+            position: relative;         /* Para posicionar elementos internos */
+            overflow: hidden;           /* Oculta contenido que se desborda */
+            padding: 0 5%;              /* Espaciado lateral */
+        }
+
+        .header-content {
+            position: relative;         /* Posición relativa */
+            z-index: 10;                /* Por encima de otros elementos */
+            text-align: center;         /* Texto centrado */
+            width: 100%;                /* Ancho completo */
+        }
+
+        /* Nombre de la profesión */
+        .profession {
+            color: var(--text-color);   /* Color gris azulado */
+            margin-bottom: 2rem;        /* Espacio debajo */
+            position: relative;         /* Para usar el pseudo-elemento ::after */
+            display: inline-block;      /* Para que el ancho sea el del contenido */
+            font-size: clamp(1.5rem, 4vw, 2.5rem); /* Tamaño responsive */
+        }
+
+        /* Línea debajo del nombre de profesión */
+        .profession::after {
+            content: '';                /* Pseudo-elemento */
+            position: absolute;         /* Posicionado de forma absoluta */
+            width: 50%;                 /* Ancho del 50% */
+            height: 3px;                /* Altura de la línea */
+            bottom: -10px;              /* Posición debajo del texto */
+            left: 25%;                  /* Centrado horizontalmente */
+            background-color: var(--secondary-color); /* Color cian */
+        }
+
+        /* Título principal (ADSO) */
+        .name-title {
+            font-size: clamp(3rem, 8vw, 6rem); /* Tamaño responsive muy grande */
+            font-weight: 700;           /* Texto en negrita */
+            color: var(--secondary-color); /* Color cian */
+            text-transform: uppercase;  /* Convierte a mayúsculas */
+            margin-bottom: 1rem;        /* Espacio debajo */
+            line-height: 1;             /* Reduce el espacio entre líneas */
+        }
+
+        /* Especialidad/Descripción */
+        .specialty {
+            font-size: clamp(1rem, 2.5vw, 1.5rem); /* Tamaño responsive */
+            color: var(--text-secondary); /* Color gris azulado más oscuro */
+            max-width: 600px;           /* Ancho máximo */
+            margin: 0 auto 3rem;        /* Centrado con espacio debajo */
+        }
+
+        /* Botón de contacto */
+        .contact-btn {
+            display: inline-block;      /* Se comporta como bloque pero en línea */
+            padding: 1rem 2rem;         /* Espaciado interno */
+            border: 1px solid var(--secondary-color); /* Borde cian */
+            color: var(--secondary-color); /* Texto cian */
+            text-decoration: none;      /* Sin subrayado */
+            border-radius: 5px;         /* Esquinas redondeadas */
+            transition: all 0.3s ease;  /* Transición suave para todos los cambios */
+            font-size: 1rem;            /* Tamaño del texto */
+            margin-top: 1rem;           /* Espacio superior */
+            cursor: pointer;            /* Muestra cursor de clickeable */
+        }
+
+        .contact-btn:hover {
+            background-color: rgba(100, 255, 218, 0.1); /* Fondo semi-transparente al hover */
+            transform: translateY(-3px); /* Levanta el botón 3px */
+        }
+
+        /* ============================================
+           ICONOS FLOTANTES
+           ============================================ */
+        .floating-icons {
+            position: absolute;         /* Posicionado de forma absoluta */
+            top: 0;                     /* En la parte superior */
+            left: 0;                    /* En la izquierda */
+            width: 100%;                /* Ancho completo */
+            height: 100%;               /* Alto completo */
+            z-index: -1;                /* Detrás del contenido principal */
+            pointer-events: none;       /* No interfiere con clicks */
+        }
+
+        .tech-icon {
+            position: absolute;         /* Posicionado de forma absoluta */
+            width: 50px;                /* Ancho del icono */
+            height: 50px;               /* Alto del icono */
+            opacity: 0.7;               /* Semi-transparente */
+            transition: all 0.3s ease;  /* Transición suave */
+        }
+
+        .tech-icon:hover {
+            opacity: 1;                 /* Completamente visible al hover */
+            transform: scale(1.2);      /* Se agranda un 20% */
+        }
+
+        /* Posiciones y animaciones de cada icono */
+        .tech-icon:nth-child(1) { animation: float1 15s infinite ease-in-out; top: 20%; left: 10%; }
+        .tech-icon:nth-child(2) { animation: float2 18s infinite ease-in-out; top: 70%; left: 15%; animation-delay: 2s; }
+        .tech-icon:nth-child(3) { animation: float3 16s infinite ease-in-out; top: 30%; right: 10%; animation-delay: 1s; }
+        .tech-icon:nth-child(4) { animation: float1 17s infinite ease-in-out; top: 50%; left: 40%; animation-delay: 1.5s; }
+        .tech-icon:nth-child(5) { animation: float2 16s infinite ease-in-out; top: 15%; right: 20%; animation-delay: 2.5s; }
+        .tech-icon:nth-child(6) { animation: float3 18s infinite ease-in-out; bottom: 25%; right: 15%; animation-delay: 0.8s; }
+        .tech-icon:nth-child(7) { animation: float1 19s infinite ease-in-out; top: 60%; right: 30%; animation-delay: 3s; }
+        .tech-icon:nth-child(8) { animation: float2 15s infinite ease-in-out; bottom: 35%; left: 25%; animation-delay: 1.2s; }
+        .tech-icon:nth-child(9) { animation: float3 17s infinite ease-in-out; top: 75%; left: 60%; animation-delay: 2.8s; }
+
+        /* ============================================
+           ANIMACIONES DE FLOTACIÓN
+           ============================================ */
+        /* Animación 1: Movimiento flotante con rotación */
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }     /* Posición inicial */
+            25% { transform: translate(50px, -30px) rotate(5deg); }   /* Primer movimiento */
+            50% { transform: translate(30px, 40px) rotate(-5deg); }   /* Punto medio */
+            75% { transform: translate(-40px, 20px) rotate(3deg); }   /* Tercer movimiento */
+        }
+
+        /* Animación 2: Movimiento flotante diferente */
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-60px, 20px) rotate(-3deg); }
+            50% { transform: translate(40px, -30px) rotate(5deg); }
+            75% { transform: translate(20px, 50px) rotate(-2deg); }
+        }
+
+        /* Animación 3: Movimiento flotante diferente */
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -40px) rotate(4deg); }
+            50% { transform: translate(-50px, 30px) rotate(-6deg); }
+            75% { transform: translate(20px, 60px) rotate(2deg); }
+        }
+
+        /* ============================================
+           ELEMENTOS SVG
+           ============================================ */
+        /* Contenedor del SVG con animación de movimiento */
+        .motionpath {
+            position: absolute;         /* Posicionado de forma absoluta */
+            top: 0;                     /* En la parte superior */
+            left: 0;                    /* En la izquierda */
+            width: 100%;                /* Ancho completo */
+            height: 100%;               /* Alto completo */
+            z-index: -2;                /* Detrás de otros elementos */
+        }
+
+        .motionpath path {
+            stroke: rgba(100, 255, 218, 0.1); /* Color de trazo semi-transparente */
+            stroke-width: 2;            /* Grosor del trazo */
+            fill: none;                 /* Sin relleno */
+        }
+
+        /* Elipse animada de fondo */
+        .homepage-header__ellipse {
+            position: absolute;         /* Posicionado de forma absoluta */
+            top: 50%;                   /* En el medio verticalmente */
+            left: 50%;                  /* En el medio horizontalmente */
+            transform: translate(-50%, -50%); /* Centra el elemento */
+            width: 120%;                /* Un poco más ancho que el viewport */
+            height: 120%;               /* Un poco más alto que el viewport */
+            z-index: -3;                /* Muy atrás */
+        }
+
+        /* Línea con animación de trazo */
+        #dash-offset {
+            stroke: rgba(100, 255, 218, 0.05); /* Color muy semi-transparente */
+            stroke-dasharray: 1000;     /* Longitud total del trazo discontinuo */
+            stroke-dashoffset: 1000;    /* Inicia sin mostrar el trazo */
+            animation: dash 30s linear infinite; /* Anima el trazo */
+        }
+
+        /* Animación que muestra el trazo gradualmente */
+        @keyframes dash {
+            to { stroke-dashoffset: 0; } /* Muestra todo el trazo */
+        }
+
+        /* ============================================
+           DIVISOR DE ONDA
+           ============================================ */
+        .wave-divider {
+            position: absolute;         /* Posicionado de forma absoluta */
+            bottom: 0;                  /* En la parte inferior */
+            left: 0;                    /* En la izquierda */
+            width: 100%;                /* Ancho completo */
+            overflow: hidden;           /* Oculta contenido que se desborda */
+            line-height: 0;             /* Elimina espacios extra */
+            transform: rotate(180deg);  /* Rota la onda */
+        }
+
+        .wave-divider svg {
+            position: relative;         /* Posición relativa */
+            display: block;             /* Se comporta como bloque */
+            width: calc(100% + 1.3px); /* Ancho completo más un pixel */
+            height: 100px;              /* Alto de la onda */
+        }
+
+        .wave-divider path {
+            transition: all 0.3s ease;  /* Transición suave */
+        }
+
+        .wave-divider:hover path {
+            opacity: 0.8;               /* Más opaco al hacer hover */
+        }
+
+        /* ============================================
+           ESTILOS RESPONSIVE (TABLETS)
+           ============================================ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 5%;     /* Menos padding */
+            }
+
+            .logo {
+                font-size: 1.2rem;      /* Logo más pequeño */
+            }
+
+            .nav-links {
+                gap: 1rem;              /* Menos espacio entre enlaces */
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;      /* Texto más pequeño */
+            }
+
+            .tech-icon {
+                width: 40px;            /* Iconos más pequeños */
+                height: 40px;
+            }
+
+            .profession {
+                font-size: clamp(1rem, 3vw, 1.5rem); /* Tamaño responsive */
+            }
+
+            .name-title {
+                font-size: clamp(2rem, 6vw, 4rem); /* Tamaño responsive */
+            }
+
+            .specialty {
+                font-size: clamp(0.9rem, 2vw, 1.2rem); /* Tamaño responsive */
+            }
+
+            .contact-btn {
+                padding: 0.8rem 1.5rem; /* Botón más pequeño */
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ============================================
+           ESTILOS RESPONSIVE (MÓVILES)
+           ============================================ */
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem 3%;       /* Menos padding */
+                flex-direction: column;  /* Elementos apilados verticalmente */
+                gap: 1rem;              /* Espacio entre elementos */
+            }
+
+            .nav-links {
+                gap: 0.8rem;            /* Menos espacio entre enlaces */
+                width: 100%;            /* Ancho completo */
+                justify-content: center; /* Centrado */
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;      /* Texto más pequeño */
+            }
+
+            .tech-icon {
+                width: 30px;            /* Iconos muy pequeños */
+                height: 30px;
+            }
+
+            .floating-icons {
+                display: none;          /* Oculta los iconos en móvil */
+            }
+
+            .profession {
+                font-size: 1rem;        /* Tamaño fijo pequeño */
+            }
+
+            .name-title {
+                font-size: 2rem;        /* Tamaño fijo pequeño */
+                margin-bottom: 0.5rem;  /* Menos espacio */
+            }
+
+            .specialty {
+                font-size: 0.9rem;      /* Tamaño pequeño */
+                margin: 0 auto 2rem;    /* Espaciado */
+            }
+
+            .contact-btn {
+                padding: 0.7rem 1.2rem; /* Botón compacto */
+                font-size: 0.85rem;     /* Texto pequeño */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================
+         NAVEGACIÓN
+         ============================================ -->
+    <nav>
+        <!-- Logo del portafolio (abreviaturas de nombre) -->
+        <a href="#" class="logo">JM</a>
+        
+        <!-- Enlaces de navegación -->
+        <div class="nav-links">
+            <a href="./index.html">Inicio</a>
+            <a href="./proyectos.html">Proyectos</a>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HEADER / SECCIÓN PRINCIPAL
+         ============================================ -->
+    <header class="homepage-header">
+        <!-- ICONOS FLOTANTES -->
+        <!-- 9 iconos (HTML, CSS, JS repetidos 3 veces) que flotan de forma aleatoria -->
+        <div class="floating-icons">
+            <!-- Icono 1: HTML5 -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="tech-icon">
+            
+            <!-- Icono 2: CSS3 -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="tech-icon">
+            
+            <!-- Icono 3: JavaScript -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon">
+            
+            <!-- Icono 4: HTML5 (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="tech-icon">
+            
+            <!-- Icono 5: CSS3 (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="tech-icon">
+            
+            <!-- Icono 6: JavaScript (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon">
+            
+            <!-- Icono 7: HTML5 (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="tech-icon">
+            
+            <!-- Icono 8: CSS3 (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="tech-icon">
+            
+            <!-- Icono 9: JavaScript (repetido) -->
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon">
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL DEL HEADER -->
+        <div class="header-content">
+            <!-- Nombre del desarrollador -->
+            <h1 class="profession">Juan Manuel Mejia Duarte</h1>
+            
+            <!-- Título principal (programa de estudio) -->
+            <h2 class="name-title">A D S O</h2>
+            
+            <!-- Descripción -->
+            <p class="specialty">Estudiante del SENA en Análisis y Desarrollo de Software.</p>
+            
+            <!-- Botón para ver proyectos -->
+            <a href="./proyectos.html" class="contact-btn">Ver Proyectos HTML, CSS y JS</a>
+        </div>
+
+        <!-- SVG DECORATIVO: Ruta de movimiento animada -->
+        <!-- Este SVG contiene una línea de trazo discontinuo que se anima -->
+        <svg aria-hidden="true" class="motionpath" viewBox="0 0 1474 782" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M723.5 35.0001C1144.17 -39.9999 1836.8 -41.2999 1242 553.5C498.5 1297 -832.5 -25.9997 723.5 35.0001Z" />
+        </svg>
+
+        <!-- SVG DECORATIVO: Elipse de fondo con animación -->
+        <!-- Este es un elemento decorativo que crea un efecto visual en el fondo -->
+        <svg aria-hidden="true" class="homepage-header__ellipse" viewBox="0 0 1718.10407 1082.34997" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Definiciones para clipping path (para recortar la imagen) -->
+            <defs>
+                <clipPath id="clip-clop">
+                    <!-- Primera forma de recorte -->
+                    <path d="M1708,275.627991 L1717,275.627991 C1687,786.567482 1330.33333,1017.96132 829,1072.62799 C77,1154.62799 0,669.627991 0,533.627991 C0,397.627991 13,60.6279919 908,3.62799184 C1307.33333,-17.0386748 1708,47.5674823 1717,275.567482 L1708,275.567482 C1682,43.5674823 1320,2.2946585 908,17.6279919 C290,40.6279919 20,234.627991 20,533.627991 C20,832.627991 307,1120.62799 829,1057.62799 C1298.33333,1018.29466 1657,775.567482 1708,275.627991 Z" class="transform-0"></path>
+                    
+                    <!-- Segunda forma de recorte -->
+                    <path d="M1674,583.785575 L1687,583.785575 C1596.33333,1060.45224 1370.33333,1015.17941 869,1069.84608 C117,1151.84608 0,746.846084 0,610.846084 C0,474.846084 70,37.7855753 1058,0.846084822 C1457.33333,-19.8205818 1687,342.725066 1687,583.785575 L1674,583.785575 C1647,336.725066 1470,-0.487248518 1058,14.8460849 C440,37.8460849 20,311.846084 20,610.846084 C20,909.846084 347,1117.84608 869,1054.84608 C1334,997.785575 1557.33333,1065.78558 1674,583.785575 Z" class="transform-1"></path>
+                </clipPath>
+            </defs>
+            
+            <!-- Path que se anima con el efecto de trazo discontinuo -->
+            <path d="M1708,275.627991 L1717,275.627991 C1687,786.567482 1330.33333,1017.96132 829,1072.62799 C77,1154.62799 0,669.627991 0,533.627991 C0,397.627991 13,60.6279919 908,3.62799184 C1307.33333,-17.0386748 1708,47.5674823 1717,275.567482 L1708,275.567482 C1682,43.5674823 1320,2.2946585 908,17.6279919 C290,40.6279919 20,234.627991 20,533.627991 C20,832.627991 307,1120.62799 829,1057.62799 C1298.33333,1018.29466 1657,775.567482 1708,275.627991 Z" clip-path="url(#clip-clop)" fill="none" stroke-width="500" id="dash-offset"></path>
+        </svg>
+
+        <!-- DIVISOR DE ONDA: Elemento decorativo que divide secciones -->
+        <!-- Contiene 3 capas de onda con diferentes opacidades para crear profundidad -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <!-- Primera capa de onda (más transparente) -->
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="var(--secondary-color)"></path>
+                
+                <!-- Segunda capa de onda (opacidad media) -->
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="var(--secondary-color)"></path>
+                
+                <!-- Tercera capa de onda (más opaca) -->
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="var(--secondary-color)"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- ============================================
+         SCRIPT - FUNCIONALIDAD JAVASCRIPT
+         ============================================ -->
+    <script>
+        /* Selecciona todos los enlaces que comienzan con # (enlaces internos) */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            /* Añade un evento de click a cada enlace */
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); /* Previene el comportamiento por defecto del enlace */
+                
+                /* Obtiene el atributo href del enlace (ej: #projects) */
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                /* Verifica si el elemento target existe */
+                if (target) {
+                    /* Desplaza suavemente hasta el elemento target */
+                    target.scrollIntoView({ behavior: 'smooth' }); /* smooth hace el scroll gradual */
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

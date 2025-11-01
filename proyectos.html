@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Proyectos</title>
+    <!-- FAVICON - Icono que aparece en la pestaña del navegador -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a192f'/><text x='50' y='65' font-size='70' font-weight='bold' text-anchor='middle' fill='%2364ffda'>&lt;/&gt;</text></svg>">
+
+    <style>
+        /* ============================================
+           VARIABLES GLOBALES
+           ============================================ */
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #64ffda;
+            --text-color: #ccd6f6;
+            --text-secondary: #8892b0;
+            --html-color: #e34f26;
+            --css-color: #264de4;
+            --js-color: #f7df1e;
+            --font-main: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, sans-serif;
+        }
+
+        /* ============================================
+           ESTILOS GENERALES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* ============================================
+           NAVEGACIÓN
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background-color: rgba(10, 25, 47, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .projects-header {
+            height: auto;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 5%;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+        }
+
+        .name-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            line-height: 1;
+            position: relative;
+        }
+
+        .profession {
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .profession::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 25%;
+            background-color: var(--secondary-color);
+        }
+
+        .specialty {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ============================================
+           SECCIÓN DE PROYECTOS
+           ============================================ */
+        .projects-section {
+            padding: 1rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--secondary-color);
+        }
+
+        /* Grid de proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        /* ============================================
+           TARJETAS DE PROYECTOS
+           ============================================ */
+        .project-card {
+            background: rgba(100, 255, 218, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(5px);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Borde superior de color según la tecnología */
+        .project-card[data-tags*="html"] {
+            border-top: 4px solid var(--html-color);
+        }
+
+        .project-card[data-tags*="css"] {
+            border-top: 4px solid var(--css-color);
+        }
+
+        .project-card[data-tags*="javascript"] {
+            border-top: 4px solid var(--js-color);
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.08);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           ETIQUETAS DE TECNOLOGÍA
+           ============================================ */
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        /* Colores específicos para cada tecnología por posición */
+        .tech-tag:nth-child(1) {
+            background: linear-gradient(135deg, var(--html-color), #ff5a2e);
+            color: white;
+        }
+
+        .tech-tag:nth-child(2) {
+            background: linear-gradient(135deg, var(--css-color), #3d5afe);
+            color: white;
+        }
+
+        .tech-tag:nth-child(3) {
+            background: linear-gradient(135deg, var(--js-color), #f9d835);
+            color: #333;
+            font-weight: bold;
+        }
+
+        .project-card:hover .tech-tag {
+            transform: translateY(-3px);
+        }
+
+        /* ============================================
+           ENLACES DE PROYECTO
+           ============================================ */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            flex: 1;
+            min-width: 120px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Botón GitHub */
+        .project-link.github-btn {
+            background: linear-gradient(135deg, #333, #555);
+            border: 2px solid #666;
+        }
+
+        .project-link.github-btn:hover {
+            background: linear-gradient(135deg, #555, #777);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(51, 51, 51, 0.4);
+        }
+
+        /* Botón Demo (Modal) */
+        .project-link.demo-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #4dd9c9);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .project-link.demo-btn:hover {
+            background: linear-gradient(135deg, #64ffda, #50e6c2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        /* Botón Abrir Pestaña */
+        .project-link.open-btn {
+            background: linear-gradient(135deg, var(--secondary-color), #4dd9c9);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .project-link.open-btn:hover {
+            background: linear-gradient(135deg, #64ffda, #50e6c2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 25, 47, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 1200px;
+            height: 85vh;
+            background-color: var(--primary-color);
+            border-radius: 12px;
+            border: 2px solid var(--secondary-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(100, 255, 218, 0.3);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: rgba(100, 255, 218, 0.1);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: var(--html-color);
+        }
+
+        .modal-iframe {
+            flex-grow: 1;
+            border: none;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 3%;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-header {
+                margin-top: 50px;
+                padding: 3rem 5%;
+            }
+
+            .project-links {
+                gap: 0.8rem;
+            }
+
+            .project-link {
+                min-width: 100px;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .project-link {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .projects-section {
+                padding: 3rem 3%;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================
+         NAVEGACIÓN
+         ============================================ -->
+    <nav>
+        <!-- Logo del portafolio -->
+        <a href="#" class="logo">JM</a>
+
+        <!-- Enlaces de navegación -->
+        <div class="nav-links">
+            <a href="./index.html">Inicio</a>
+            <a href="./proyectos.html">Proyectos</a>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HEADER / SECCIÓN PRINCIPAL
+         ============================================ -->
+    <header class="projects-header">
+        <div class="header-content">
+            <!-- Subtítulo -->
+            <h1 class="profession">Mis Proyectos</h1>
+
+            <!-- Título principal -->
+            <h2 class="name-title">HTML, CSS Y JS</h2>
+
+            <!-- Descripción -->
+            <p class="specialty"></p>
+        </div>
+    </header>
+
+    <!-- ============================================
+         SECCIÓN DE PROYECTOS
+         ============================================ -->
+    <section class="projects-section">
+        <h2 class="section-title">HTML AND CSS</h2>
+
+        <div class="projects-grid">
+            <!-- ===============================
+                 PROJECT 1: Diario Personal
+                 =============================== -->
+            <div class="project-card" data-tags="html css" data-name="diario">
+                <!-- Imagen del proyecto -->
+                <img class="project-image"
+                    src="https://img.freepik.com/premium-vector/bloc-de-notas-de-papel-diario-naranja-aislado-sobre-fondo-blanco-planificador-de-diario-personal-de-dibujos-animados-vector-ilustracion-plana-diario-de-pagina-del-organizador-colorido-con-etiqueta-y-marcador_198278-6198.jpg"
+                    alt="Proyecto Diario">
+
+                <div class="project-content">
+                    <!-- Título del proyecto -->
+                    <h3 class="project-title">Diario Personal</h3>
+
+                    <!-- Descripción -->
+                    <p class="project-description">Diario personal interactivo desarrollado con HTML y CSS. Página web
+                        estática que simula un diario digital con diseño limpio y responsive.</p>
+
+                    <!-- Etiquetas de tecnología -->
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+
+                    <!-- Enlaces de acción -->
+                    <div class="project-links">
+                        <!-- Botón GitHub -->
+                        <a href="https://github.com" class="project-link github-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+
+                        <!-- Botón Ver Demo (Modal) -->
+                        <button class="project-link demo-btn open-modal" data-url="./HTML-CSS/My_Diario/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            Ver Demo
+                        </button>
+
+                        <!-- Botón Abrir en Nueva Pestaña -->
+                        <a href="./HTML-CSS/My_Diario/index.html" class="project-link open-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                            Abrir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 PROJECT 2: Página Web de Viaje
+                 =============================== -->
+            <div class="project-card" data-tags="html css" data-name="viaje">
+                <!-- Imagen del proyecto -->
+                <img class="project-image"
+                    src="https://images-wixmp-530a50041672c69d335ba4cf.wixmp.com/templates/image/c8c088732e117c8e6ceb96cb7aa72e8893f7e9b37348f6bb9b8b710c8c4e68221626354475290.jpg"
+                    alt="Proyecto Viaje">
+
+                <div class="project-content">
+                    <!-- Título del proyecto -->
+                    <h3 class="project-title">Página Web de Viaje</h3>
+
+                    <!-- Descripción -->
+                    <p class="project-description">Plataforma web estática para planificar viajes a destinos turísticos
+                        populares. Incluye información de lugares y opciones de estadía con diseño moderno.</p>
+
+                    <!-- Etiquetas de tecnología -->
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+
+                    <!-- Enlaces de acción -->
+                    <div class="project-links">
+                        <!-- Botón GitHub -->
+                        <a href="https://github.com" class="project-link github-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+
+                        <!-- Botón Ver Demo (Modal) -->
+                        <button class="project-link demo-btn open-modal" data-url="./HTML-CSS/Hoja-de-vida/index.js">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            Ver Demo
+                        </button>
+
+                        <!-- Botón Abrir en Nueva Pestaña -->
+                        <a href="./HTML-CSS/Hoja-de-vida/index.js" class="project-link open-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                            Abrir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 PROJECT 3: Hoja de Vida
+                 =============================== -->
+            <div class="project-card" data-tags="html css" data-name="viaje">
+                <!-- Imagen del proyecto -->
+                <img class="project-image"
+                    src="https://img.freepik.com/vector-premium/curriculum-vitae-simple-moderno-o-plantilla-curriculum-vitae-vector-color-verde-blanco_661823-554.jpg"
+                    alt="Proyecto Viaje">
+
+                <div class="project-content">
+                    <!-- Título del proyecto -->
+                    <h3 class="project-title">HOJA DE VIDA</h3>
+
+                    <!-- Descripción -->
+                    <p class="project-description"> Una pagina estatica de un diseño de una hoja de vida</p>
+
+                    <!-- Etiquetas de tecnología -->
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+
+                    <!-- Enlaces de acción -->
+                    <div class="project-links">
+                        <!-- Botón GitHub -->
+                        <a href="https://github.com" class="project-link github-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+
+                        <!-- Botón Ver Demo (Modal) -->
+                        <button class="project-link demo-btn open-modal" data-url="./HTML-CSS/Hoja-de-Vida/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            Ver Demo
+                        </button>
+
+                        <!-- Botón Abrir en Nueva Pestaña -->
+                        <a href="./HTML-CSS/Hoja-de-Vida/index.html" class="project-link open-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                            Abrir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===============================
+                 PROJECT 4: tiemda de Accesorio
+                 =============================== -->
+            <div class="project-card" data-tags="html css" data-name="viaje">
+                <!-- Imagen del proyecto -->
+                <img class="project-image"
+                    src="https://disenowebplus.com/wp-content/uploads/2020/11/Tienda-de-ropa-y-accesorios-tienda-online-diseno-web-plus-780x959-jpg.jpg"
+                    alt="Proyecto Viaje">
+
+                <div class="project-content">
+                    <!-- Título del proyecto -->
+                    <h3 class="project-title">TIENDA DE ACCESORIOS</h3>
+
+                    <!-- Descripción -->
+                    <p class="project-description"> Una pagina estatica de un diseño de una hoja de vida</p>
+
+                    <!-- Etiquetas de tecnología -->
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+
+                    <!-- Enlaces de acción -->
+                    <div class="project-links">
+                        <!-- Botón GitHub -->
+                        <a href="https://github.com" class="project-link github-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+
+                        <!-- Botón Ver Demo (Modal) -->
+                        <button class="project-link demo-btn open-modal" data-url="./HTML-CSS/Hoja-de-Vida/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            Ver Demo
+                        </button>
+
+                        <!-- Botón Abrir en Nueva Pestaña -->
+                        <a href="./HTML-CSS/Hoja-de-Vida/index.html" class="project-link open-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                            Abrir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+    </section>
+
+     <section class="projects-section">
+        <h2 class="section-title">HTML AND CSS</h2>
+
+        <div class="projects-grid">
+            <!-- ===============================
+                 PROJECT 1: Diario Personal
+                 =============================== -->
+            <div class="project-card" data-tags="html css" data-name="diario">
+                <!-- Imagen del proyecto -->
+                <img class="project-image"
+                    src="https://img.freepik.com/premium-vector/bloc-de-notas-de-papel-diario-naranja-aislado-sobre-fondo-blanco-planificador-de-diario-personal-de-dibujos-animados-vector-ilustracion-plana-diario-de-pagina-del-organizador-colorido-con-etiqueta-y-marcador_198278-6198.jpg"
+                    alt="Proyecto Diario">
+
+                <div class="project-content">
+                    <!-- Título del proyecto -->
+                    <h3 class="project-title">Diario Personal</h3>
+
+                    <!-- Descripción -->
+                    <p class="project-description">Diario personal interactivo desarrollado con HTML y CSS. Página web
+                        estática que simula un diario digital con diseño limpio y responsive.</p>
+
+                    <!-- Etiquetas de tecnología -->
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+
+                    <!-- Enlaces de acción -->
+                    <div class="project-links">
+                        <!-- Botón GitHub -->
+                        <a href="https://github.com" class="project-link github-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            GitHub
+                        </a>
+
+                        <!-- Botón Ver Demo (Modal) -->
+                        <button class="project-link demo-btn open-modal" data-url="./HTML-CSS/My_Diario/index.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                            Ver Demo
+                        </button>
+
+                        <!-- Botón Abrir en Nueva Pestaña -->
+                        <a href="./HTML-CSS/My_Diario/index.html" class="project-link open-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                                <polyline points="13 2 13 9 20 9" />
+                            </svg>
+                            Abrir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+    </section>
+
+    <!-- ============================================
+         MODAL PARA VER DEMO
+         ============================================ -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Vista Previa del Proyecto</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <iframe class="modal-iframe" id="modal-iframe" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCRIPT JAVASCRIPT
+         ============================================ -->
+    <script>
+        /* Espera a que el DOM esté completamente cargado */
+        document.addEventListener('DOMContentLoaded', function () {
+            /* Obtiene elementos del modal */
+            const modal = document.getElementById('project-modal');
+            const modalIframe = document.getElementById('modal-iframe');
+            const closeModal = document.querySelector('.close-modal');
+            const openModalButtons = document.querySelectorAll('.open-modal');
+
+            /* Abrir modal cuando se hace click en "Ver Demo" */
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const projectUrl = this.getAttribute('data-url');
+                    modalIframe.src = projectUrl;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            /* Cerrar modal con el botón X */
+            closeModal.addEventListener('click', function () {
+                modal.classList.remove('active');
+                modalIframe.src = '';
+                document.body.style.overflow = 'auto';
+            });
+
+            /* Cerrar modal al hacer click fuera del contenido */
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    modalIframe.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            /* Cerrar modal con la tecla ESC */
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    modalIframe.src = '';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            /* Smooth scrolling para enlaces internos */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

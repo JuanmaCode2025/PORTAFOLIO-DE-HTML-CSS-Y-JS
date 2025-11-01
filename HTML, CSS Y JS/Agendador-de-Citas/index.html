@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veterinaria</title>
+   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2295/2295163.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="padrecontainer">
+    <header class="header text-center">
+      <h1>Veterinaria</h1>
+    </header>
+
+    <div class="controls">
+      <section><input type="text" id="searchInput" placeholder="Buscar por mascota o propietario"
+          oninput="buscarCitas()">
+        <select onchange="filtrarPorEstado(this.value)">
+          <option value="">Todos los estados</option>
+          <option value="Abierta">Abiertas</option>
+          <option value="Terminada">Terminadas</option>
+          <option value="Anulada">Anuladas</option>
+        </select>
+      </section>
+
+      <section>
+        <a href="#vetModal" class="open-modal">
+          <i class="fas fa-paw"></i><p>Agregar Cita</p>
+        </a>
+      </section>
+    </div>
+
+    <section class="ccc">
+      <a href="#vetModal" class="open-modal-btn">
+        <i class="fas fa-paw"></i>
+      </a>
+
+      <!-- Modal de Citas -->
+      <div id="vetModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2><i class="fas fa-paw"></i> Registro de Cita Veterinaria</h2>
+            <a href="#" class="close" onclick="document.getElementById('citaForm').reset(); return true;">&times;</a>
+          </div>
+          <div class="modal-body">
+            <form id="citaForm">
+              <section>
+                <fieldset>
+                  <legend>Información del Paciente</legend>
+                  <div class="form-row">
+                    <div class="col-md-6 form-group">
+                      <label for="nombre" class="form-label">Nombre de la Mascota</label>
+                      <input type="text" class="form-control" id="nombre" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="tipo" class="form-label">Tipo de Mascota</label>
+                      <select class="form-control" id="tipo" >
+                        <option value="">Seleccione el tipo</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-md-6 form-group">
+                      <label for="propietario" class="form-label">Propietario</label>
+                      <input type="text" class="form-control" id="propietario" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="telefono" class="form-label">Teléfono</label>
+                      <input type="number" class="form-control" id="telefono" >
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Detalles de la Cita</legend>
+                  <div class="form-row">
+                    <div class="col-md-6 form-group">
+                      <label for="fecha" class="form-label">Fecha</label>
+                      <input type="date" class="form-control" id="fecha" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="hora" class="form-label">Hora</label>
+                      <input type="time" class="form-control" id="hora" >
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sintomas" class="form-label">Síntomas o Motivo de Consulta</label>
+                    <textarea class="form-control" id="sintomas" rows="4" ></textarea>
+                    <small id="charCount">0/400 caracteres</small>
+                  </div>
+                </fieldset>
+              </section>
+
+              <footer style="text-align: center;">
+                <button type="submit" class="btn-submit">
+                  <i class="fas fa-calendar-plus"></i> Programar Cita
+                </button>
+              </footer>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Confirmar eliminación</h2>
+          <a href="#" class="close" onclick="confirmarEliminacion(false)">&times;</a>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro que deseas eliminar esta cita?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-submit" onclick="confirmarEliminacion(true)">Confirmar</button>
+          <button class="btn-submit" onclick="confirmarEliminacion(false)">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Botón fijo para agendar cita (visible solo en pantallas pequeñas) -->
+<a href="#vetModal" class="fixed-schedule-btn open-modal-btn">
+  <i class="fas fa-calendar-plus"></i>
+</a>
+
+
+
+    <section class="minibody" id="citasContainer"></section>
+  </div>
+
+  <script src="./index.js"></script>
+  <link rel="stylesheet" href="card.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

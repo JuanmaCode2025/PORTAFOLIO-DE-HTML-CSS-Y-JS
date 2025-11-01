@@ -1,0 +1,460 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0px;
+}
+
+.contenedor_Padre {
+  width: 100%;
+  margin: 0;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.hoja {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  margin: 0px;
+  padding: 40px 200px;
+  background-color: white;
+
+}
+
+@media (max-width: 1366px) {
+  .hoja {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 5px;
+    padding: 0px;
+    background-color: white;
+
+  }
+}
+
+.left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #d1d1d1;
+  padding: 5px;
+  margin: 0;
+
+}
+
+.ima {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 15px;
+  margin: 0;
+}
+
+.profile-img {
+  border-radius: 50%;
+  border: 5px solid black;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+.contact-info p,
+.skills p,
+.hobbies p {
+  margin: 0;
+}
+
+.skills {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 px;
+  gap: 25px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  margin: 0px;
+}
+
+.hobbies {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin: 0px;
+  gap: 20px;
+}
+
+#ii {
+  font-size: 23px;
+}
+
+.iconos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Permite que los íconos pasen a la siguiente línea */
+  justify-content: center;
+  /* Centra horizontalmente */
+  gap: 10px;
+  /* Espaciado entre íconos */
+}
+
+.hic,
+#hic {
+  font-size: 50px;
+  /* Tamaño de los íconos */
+
+  text-align: start;
+  /* Centra los íconos */
+}
+
+
+.right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #2d2d2e;
+  gap: 20px;
+}
+
+.nombre {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 25px;
+  padding-left: 20px;
+}
+
+.name {
+  font-size: 70px;
+  color: #a1d72a;
+}
+
+.lastname {
+  display: block;
+  font-weight: bold;
+  color: #a1d72a;
+}
+
+.occupation {
+  font-size: 30px;
+  font-weight: normal;
+  color: #ffffff;
+}
+
+
+.titulos {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 160px;
+  padding-left: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #a1d72a;
+}
+
+.text1 {
+  display: flex;
+  color: white;
+  padding-left: 20px;
+  width: 440px;
+  font-size: 17px;
+}
+
+#pd {
+  font-size: 13px;
+}
+
+.infor2,
+.infor1 {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+
+.respuesta1 {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 10px;
+  gap: 20px;
+}
+
+.respuesta {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 10px;
+  padding-bottom: 40px;
+  gap: 20px;
+}
+
+#pun {
+  padding-top: 18px;
+  padding-bottom: 12px;
+  height: 155px;
+}
+
+#tos {
+  padding-top: 36px;
+  padding-bottom: 0px;
+  height: 220px;
+}
+
+
+#iii {
+  color: black;
+}
+
+.orden {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border: 2px solid blue;
+}
+
+
+
+.content {
+  padding-left: 15px;
+}
+
+.content p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.school {
+  font-size: 14px;
+  color: #a1d72a;
+  font-weight: bold;
+}
+
+
+.leguas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.co {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.ingles {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  align-items: center;
+}
+
+.ingles p {
+  margin: 0;
+  padding: 0;
+}
+
+
+.cir {
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.circulos {
+  display: flex;
+  flex-direction: row;
+  width: 120px;
+  justify-content: space-between;
+
+}
+
+.circulo {
+  width: 12px;
+  /* Ancho */
+  height: 12px;
+  /* Alto */
+  background-color: #262626;
+  /* Color de fondo */
+  border-radius: 50%;
+  /* Hace que sea un círculo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.circulo2 {
+  width: 12px;
+  /* Ancho */
+  height: 12px;
+  /* Alto */
+  background-color: #a1d72a;
+  /* Color de fondo */
+  border-radius: 50%;
+  /* Hace que sea un círculo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+@media (max-width: 1200px) {
+  .contenedor_Padre {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .hoja {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 0;
+    padding: 0px;
+    background-color: white;
+
+  }
+
+}
+
+@media (max-width: 800px) {
+  .contenedor_Padre {
+    margin: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .hoja {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 0;
+    padding: 0px;
+    background-color: white;
+  }
+
+
+  .nombre {
+    margin-top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+
+}
+
+@media (max-width: 530px) {
+  .contenedor_Padre {
+    margin: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .hoja {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0px;
+    background-color: white;
+
+  }
+
+
+  .text1 {
+    display: flex;
+    color: white;
+    padding-left: 20px;
+    width: 380px;
+    font-size: 17px;
+  }
+
+  .nombre {
+    margin-top: 0px;
+    padding-left: 10px;
+  }
+
+  .name {
+    font-size: 70px;
+    color: #a1d72a;
+  }
+
+  .left {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .contenedor_Padre {
+    margin: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .hoja {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0px;
+    background-color: white;
+
+  }
+
+  .left {
+    text-align: center;
+    align-items: center;
+  }
+
+  .text1 {
+    width: 320px;
+    font-size: 15px;
+  }
+
+  .respuesta {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 10px;
+    padding-bottom: 40px;
+    gap: 10px;
+  }
+
+  .nombre {
+    margin-top: 0px;
+    padding-left: 10px;
+  }
+
+  .name {
+    font-size: 55px;
+    color: #a1d72a;
+  }
+
+  .hic,
+  #hic {
+    text-align: center;
+    /* Centra los íconos */
+    font-size: 65px;
+  }
+
+  .leguas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}
