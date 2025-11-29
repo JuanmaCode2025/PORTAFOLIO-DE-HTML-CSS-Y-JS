@@ -46,8 +46,6 @@ Durante el desarrollo de este proyecto aprendí a:
 
 ## 👨‍💻 Autor
 
-## 👨‍💻 Autor
-
 **Juan Manuel Mejía Duarte** 
 **@JuanmaCode2025**  
 Proyecto de práctica de maquetación web con HTML y CSS.  

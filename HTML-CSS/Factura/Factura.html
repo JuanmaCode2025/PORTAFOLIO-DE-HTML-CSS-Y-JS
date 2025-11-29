@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+</head>
+<body>
+    <div class="Contenedor">
+         <div class="fila1"></div>
+         <div class="fila2">
+            <div class="Part1">
+                <section class="sub">
+                     <div class="divir">
+                        <div id="logo">
+                           <img src="Captura de pantalla 2024-05-06 071232.jpg"height=170
+                           width=120
+                           >
+                        </div>
+                      </div>
+                     <div class="divir">
+                       <div id="factura">
+                         <h1 id="FAC">F A C T U R A</h1>
+                         <p><b id="fecha">Fecha:</b>  12/Enero/2024</p>
+                         <p><b id="factu">Factura:</b>  003</p>
+                      </div>
+                     </div>
+                </section>
+               <br>
+               <br>
+                <section class="sub">
+                      <div class="divir">
+                          <div id="datos">
+                         <h3 id="Emilia">Emilia Torres </h3>
+                         <p>Ropa Moderna Urbana</p>
+                         <p>(55) 1345-6789</p>
+                         <p>Calle Flora 123, Ciudad de Mexico</p>
+                      </div>
+                      </div>
+                     <div class="divir">
+                      <div id="metodo">
+                         <p id="pos">M É T O D O D E P A G O</p>
+                         <p><b>Cuenta:</b> 4562 7562 4741 7895</p>
+                         <p><b>Correo:</b> Hola@sitioincreible.mx</p>
+                      </div> 
+                     </div>
+                </section>
+            </div>
+            <br>
+            <br>
+            <div class="Part2">
+               <table>
+		<thead>
+			<tr>
+				<th class="articulo">ARTÍCULO</th>
+				<th>CANT.</th>
+				<th>PRECIO</th>
+				<th class="total">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="articulo">Diseño de volantes</td>
+				<td class="con">02</td>
+				<td class="con">$570</td>
+				<td class="total">$5,700</td>
+			</tr>
+			<tr style="background-color:rgb(189, 189, 189)">
+				<td class="articulo">Diseño de tarjetas</td>
+				<td class="con">02</td>
+				<td class="con">$380</td>
+				<td class="total">$9,500</td>
+			</tr>
+			<tr>
+				<td class="articulo">Diseño de facturas</td>
+				<td class="con">02</td>
+				<td class="con">$475</td>
+				<td class="total">$14,250</td>
+			</tr>
+			<tr style="background-color:rgb(189, 189, 189)">
+				<td class="articulo">Diseño de logotipo</td>
+				<td class="con">01</td>
+				<td class="con">$950</td>
+				<td class="total">$23,750</td>
+			</tr>
+			<tr>
+				<td class="articulo">Diseño web</td>
+				<td class="con">01</td>
+				<td class="con">$950</td>
+				<td class="total">$33,250</td>
+			</tr>
+			<tr class="total-row">
+				<td colspan="3" class="total">Subtotal</td>
+				<td class="total">$33,250</td>
+			</tr>
+			<tr class="total-row">
+				<td colspan="3" class="total">Imp. (16%)</td>
+				<td class="total">$4,978</td>
+			</tr>
+			<tr class="total-row">
+				<td colspan="3" class="total">TOTAL</td>
+				<td class="total">$38,228</td>
+			</tr>
+		</tbody>
+	</table>
+                
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="Part3">
+                <div class=" order">
+                    <section id="texx">
+                        <p>¿Alguna Pregunta?</p>
+                        <p>Envéianos un correro a hola@sitiioncreible.mx </p>
+                        <p> o llamanos al (55) 123-5678 </p>
+                    </section>
+                    <section id="textx">
+                        <p>¡Gracias!</p>
+                    </section>
+                </div> 
+                <hr id="hr">
+                <seccion id="cr"><center> <p>AV:Libertadores 123 tehuacan.puebla.sitiincorible.</p></center></seccion>
+                
+
+
+            </div>
+           
+       </div>
+         
+     </div>
+    <style>
+         
+     *{  margin:0 ;
+        box-sizing:border-box;
+    }
+    
+    body {  
+		 font-family: 'Roboto', sans-serif;
+		  height:100vh;}
+		   
+        .Contenedor{           
+            display: grid;
+            grid-template-columns: 10% 90%;              
+            padding-left: 23%;
+            padding-right: 23%;          
+        }
+        .fila1{background-image: url("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTjBk1Zrl9cM7Inr2XHwwB1BgLd5YaYjsZ9CfpgpPq6FY6_DZs-");
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+
+        .fila2{
+           display: grid;
+           padding-left:3%;
+           padding-right:3%;
+           
+        }
+        .sub{ gap:6%;
+            display:grid;
+            grid-template-columns:50% 50%;
+        }
+       
+       
+       table {
+			width: 100%;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		th, td {
+			padding: 8px;
+			text-align: left;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+		}
+		th {
+			background-color:#00b8a9 ;
+			color:white;
+			text-align:center;
+		}
+	
+		td.articulo {
+			width: 50%;
+		}
+		td.total {
+			text-align: right;
+		}
+		td.con {
+			text-align: center;
+		}
+		.total-row {
+			height: 30px;
+			font-weight: bold;
+		}
+		
+        
+        .Parte3{display: grid;}
+        .order{
+            display:flex;
+            align-content:space-between;
+            margin-right:5px;
+            gap:10%;
+           
+        }
+            
+          #FAC{color:#00b8a9 ;
+              font-size:35px;
+          }  
+          
+          #Emilia{color:#00b8a9 ;
+              font-size:30px;
+          }
+          #fecha{color:#00b8a9 ;
+          padding-left:12%;
+          }
+           #factu{color:#00b8a9 ;
+          padding-left:9%;
+          }
+          #pos{color:#00b8a9 ;
+         padding-left:10%;
+          }
+          
+          #factura{margin-top:30%;  }
+         
+           #metodo {
+           margin-top:12%;
+          }
+          
+          #texx{font-size:13px;}
+          #logo{display: flex;
+justify-content: center;
+              
+          }
+            
+           
+            #textx{font-size:35px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    color:#00b8a9 ;}
+            #hr{ width:96%;
+                    height: 6px;
+                    background-color:#00b8a9 ;
+                    margin:2%;
+                margin-left:2%;      }      
+             #cr {font-size:14px;}    
+ 
+          @media (max-width: 980px) {  
+              #FAC{color:#00b8a9 ;
+              font-size:24px;
+             
+          }  
+          }
+          
+        @media (max-width: 600px) {
+            *{  margin:0 ;
+        box-sizing:border-box;  }
+    
+    body {  
+		 font-family: 'Roboto', sans-serif;
+		  height:0;}
+		   
+        .Contenedor{           
+            display:grid;
+            padding: 0;                     
+        }
+        
+       
+
+         .fila2{
+           display: grid;
+           padding-left:0;
+           padding-right:0;
+           gap:0;}
+           
+         .sub{gap:10%;
+             display:flex;
+            flex-direction: column;
+         }
+         
+          .order{
+            display:flex;
+            flex-direction: column;
+            margin:2%;
+            ;}
+
+            #FAC{color:#00b8a9 ;
+              font-size:35px;
+          }  
+            
+            #factura{text-align:center;
+                margin-top:0px;}
+                
+        
+             #factura{margin-top:2px;}
+               
+            #textx{padding:2%;
+                text-align:center;}
+            #metodo { margin-top:0%;
+            padding: 2%;}
+            #hr {margin-left:2%;}
+            #hr {font-size:5px;}
+            #fecha{padding-left:0;
+                text-align:left;
+            }
+           #factu{padding-left:1%;}
+          #pos{padding-left:0}
+        }
+                 
+    
+
+        
+    </style>
+</body>
+</html>
